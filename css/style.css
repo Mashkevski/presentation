@@ -1,0 +1,11 @@
+section img.reset,
+section .reset {
+    margin: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+section li {
+    font-size: 95%;
+}

@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<link rel="stylesheet" href="lib/css/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Regular Expression</h1>
+					<div class="fragment fade-up"><span class="hljs-string">Author: Siarhei Mashkeuski</span></div>
+					<img src="./images/chapter_picture.jpg" alt="train" width="400">
+				</section>
+				<section data-transition="fade-out">
+					<h2>Regular expressions</h2>
+					<p class="hljs-string">are a way to describe patterns in string data</p>
+					<aside class="notes">
+						<ul>
+							<li>
+								This is a very difficult topic, so I'm going to talk about the basics.
+							</li>
+							<li>
+								A regular expression is a sequence of characters that defines a search pattern.
+								They form a small, separate language
+								that is part of JavaScript and many other languages and systems.
+							</li>
+						</ul>
+					</aside>
+				</section>	
+				<section>
+					<h2>Why should we use it?</h2>
+					<ul>
+						<li class="fragment fade-left">Very powerful and flexible</li>
+						<li class="fragment fade-left">Extremely fast for large amounts of text</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Regular expressions are both very difficult and really useful.
+								They are a powerful tool for inspecting and processing strings.
+								Properly understanding regular expressions will make us more effective programmers.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section data-transition="fade-out">
+					<h2>For what do we use it?</h2>
+					<ul class="fragment fade-left">
+						<li>Matching</li>
+						<li>Replacing</li>
+						<li>Searching</li>
+						<li>Many others...</lifragment>
+					</ul>
+					<aside class="notes">
+						Regular expressions are used in many situations in computer programming.
+						Usually, this pattern is used by string searching algorithms for "find"
+						or "find and replace" operations on strings, or for input validation.
+						For example with the regular expression pattern, we can search through a text file to find email addresses,
+						or verify if a given string looks like an email address.
+					</aside>
+				</section>
+				<section>
+					<h2>Creating a regular expression</h2>
+					<ul>
+						<li class="fragment fade-down">Pattern enclosed between slashes
+							<pre>
+								<code data-trim data-noescape>
+									let regexp = /pattern/gmi; // g, m, i - flags
+								</code>
+							</pre>
+						</li>
+						<li class="fragment fade-down">Constructor function
+							<pre>
+								<code data-trim data-noescape>
+									let regexp = new RegExp("pattern", "flags");
+								</code>
+							</pre>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								A regular expression is a type of object.
+								We can construct a regular expression in one of two ways:
+								The first one is using a regular expression literal, which consists of a pattern enclosed between slashes.
+								Regular expression literals provide compilation when the script is loaded.
+							</li>
+							<li>
+								The second one is calling the constructor function of the RegExp object.
+								When using the RegExp constructor, the pattern is written as a normal string.
+								Normally we use the short syntax /.../. But it does not support variable
+								Using the constructor function provides runtime compilation.
+								We use the constructor function when we know the regular expression pattern will be changing,
+								or we don't know the pattern and are getting it from another source, such as user input.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Methods</h2>
+					<ul>
+						<li class="fragment fade-down">RegExp
+							<pre>
+								<code data-trim data-noescape>
+									console.log(/abc/.test("abcde")); // → true
+									console.log(/abc/.test("abxde")); // → false
+
+									let match = /\d+/.exec("one two 100");
+									console.log(match); // → ["100"]
+								</code>
+							</pre>
+						</li>
+						<li class="fragment fade-down">String
+							<pre>
+								<code data-trim data-noescape>
+									str.match(reg)
+									str.matchAll(reg)
+									str.split(regexp|substr, limit)
+									str.replace(str|reg, str|func)
+									str.search(reg)
+								</code>
+							</pre>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Regular expression objects have a number of methods.
+								The simplest one is test.
+								When passing it a string, it returns a Boolean telling you whether the string
+								contains a match of the pattern in the expression.
+								To practically extract information from a string using a regular expression,
+								you can instead use the exec() call which provides more information about the match in its result.
+							</li>
+							<li>
+								There are also string functions to match,  search and replace substrings based on a given regular expression, which can be useful and easy to use.
+								“match” - A String method that executes a search for a match in a string. It returns an array of information or null on a mismatch.
+								“matchAll” - A String method that returns an iterator containing all of the matches, including capturing groups.
+								“search” - A String method that tests for a match in a string. It returns the index of the match, or -1 if the search fails.
+								“replace” - A String method that executes a search for a match in a string, and replaces the matched substring with a replacement substring.
+								“split” - A String method that uses a regular expression to break a string into an array of substrings.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Classes</h2>
+					<ul>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\d</span>  –  ('digit') a character from 0 to 9
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\s</span>  –  ('spaces'), tabs, newlines
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\w</span>  –  ('word'), letter of English alphabet
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\b</span>  –  ('boundary') word boundary
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">.</span>  –  any character 
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								Each character in a regular expression is either a metacharacter, or a regular character that has a literal meaning.
+								There exist following metacharacter classes: 
+								
+								\d	represent any digit character
+								\s	Any whitespace character (space, tab, newline, and similar)
+								\w	Any alphanumeric character (“word character”)
+								\b  word boundary
+								.	Any character except for newline
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Inverse classes</h2>
+					<ul>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\D</span> – non-digit
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\W</span> – non-wordly character
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">\S</span> – non-space
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								There are also inverse classes
+								\D	A character that is not a digit
+								\W	A nonalphanumeric character
+								\S	A nonwhitespace characternctions
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Sets and ranges</h2>
+					<ul>
+						<li class="fragment fade-up">
+							Sets: <span class="hljs-addition">[abc]</span> only 
+							<span class="hljs-addition">a</span>, 
+							<span class="hljs-addition">b</span>, or 
+							<span class="hljs-addition">c</span>
+						</li>
+						<li class="fragment fade-up">
+							Exclude: <span class="hljs-addition">[^abc]</span> not 
+							<span class="hljs-addition">a</span>, 
+							<span class="hljs-addition">b</span>, nor 
+							<span class="hljs-addition">c</span>
+						</li>
+						<li class="fragment fade-up">
+							Ranges: <span class="hljs-addition">[0-9A-F]</span>
+						</li>
+						<li class="fragment fade-up">
+							No escaping in <span class="hljs-addition">[…]</span>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								There is a method for matching specific characters using regular expressions, 
+								by defining them inside square brackets. 
+								Sets :
+								For example, the pattern [abc] will only match a single a, b, or c letter and nothing else.
+								Ranges:
+								Square brackets may also contain character ranges.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Capturing groups</h2>
+					<ul>
+						<li class="fragment fade-up">
+							allow to place a part of the match into a separate array
+						</li>
+						<li class="fragment fade-up">
+							if we put a quantifier after the parentheses, it applies to the parentheses as a whole, not the last character
+						</li>
+						<li class="fragment fade-up">
+							<!-- <p class="reset" > -->
+								<pre  class="reset" >
+									<code data-trim data-noescape>
+										let str = "two one";
+										let res = str.replace(/(\w+)\s(\w+)/, "$2, $1");
+										console.log(res); // one, two
+									</code>
+								</pre>
+								<img class="reset" src="images\capturing-groups.png" alt="Capturing groups" width="750">
+							<!-- </p> -->
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								They allow us to place a part of the match into a separate array.
+								If we put a quantifier after the parentheses,
+								it applies to the parentheses as a whole, not the last character. 
+								This is done by defining groups of characters and capturing them
+								using the special parentheses.
+								Any subpattern inside a pair of parentheses will be captured as a group.
+								In practice, this can be used to extract information like phone numbers
+								or emails from all sorts of data.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Quantifiers</h2>
+					<ul>
+						<li class="fragment fade-up">
+								<p>Quantity {n}</p>
+								<ul>
+									<li class="fragment fade-left"><p><span class="hljs-addition">\d{5}</span>  :  the same as <span class="hljs-addition">\d\d\d\d\d</span></p></li>
+									<li class="fragment fade-left"><p><span class="hljs-addition">{3,5}</span> : 3-5 times</p></li>
+									<li class="fragment fade-left"><p><span class="hljs-addition">\d{3,}</span> : 3 or more</p></li>
+								</ul>
+						</li>
+						<li class="fragment fade-up">
+							<p>Shorthands</p>
+							<ul>
+								<li class="fragment fade-left"><p><span class="hljs-addition">+</span> : the same as  <span class="hljs-addition">{1,}</span></p></li>
+								<li class="fragment fade-left"><p><span class="hljs-addition">*</span> : the same as  <span class="hljs-addition">{0,}</span></p></li>
+								<li class="fragment fade-left"><p><span class="hljs-addition">?</span> : the same as  <span class="hljs-addition">{0,1}</span></p></li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								The simplest quantifier is a number in curly braces.
+								The exact count 5 denotes exactly 5 digits
+								The range: {3,5}, match 3-5 times
+								We can omit the upper limit.
+								Then a regexp \d{3,} looks for sequences of digits of length 3 or more
+							</li>
+							<li>
+								There are shorthands for most used quantifiers:
+								+ plus means one or more,
+								* asterisk  means zero or more
+								? question sign means zero or one
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Alternation</h2>
+					<p>Alternation is actually a simple “OR”</p>
+					<pre  class="reset" >
+						<code data-trim data-noescape>
+							let regexp = /(abc|cde)/
+						</code>
+					</pre>
+					<img class="reset" src="images/alternation.png" alt="alternation" width="500">
+					<aside class="notes">
+						<ul>
+							<li>
+								Alternation is actually a simple “OR”
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Start <span class="hljs-addition">^</span> and finish <span class="hljs-addition">$</span></h2>
+					<li class="fragment fade-up">
+						<p>They are called “anchors”</p>
+						<p><span class="hljs-addition">^</span> matches at the beginning</p>
+						<p><span class="hljs-addition">$</span> – in the end</p>
+					</li>
+					<li class="fragment fade-up">
+						<pre>
+							<code data-trim data-noescape>
+								let str1 = "test text";
+								let str2 = "this is test text";
+								
+								<span class="hljs-code">/^test/</span>.<span class="hljs-keyword">test</span>(str1)</span>;<span class="hljs-comment"> // true</span>
+								<span class="hljs-code">/^test/</span>.<span class="hljs-keyword">test</span>(str2);<span class="hljs-comment"> // false</span>
+							</code>
+						</pre>
+					</li>
+					<aside class="notes">
+						<ul>
+							<li>
+								Matches beginning of input.
+								If the multiline flag is set to true, also matches immediately after a line break character.
+							</li>
+							<li>
+								This character has a different meaning when it appears at the start of a group.										
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Flags</h2>
+					<ul>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">i</span> – case-insensitive search
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">g</span> – search all matches, without it – only the first one
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">m</span> – multiline  mode
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">s</span> – “dotall”  mode
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">u</span> – full  unicode support
+						</li>
+						<li class="fragment fade-up">
+							<span class="hljs-addition">y</span> – sticky mode
+						</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								With this flag the search is case-insensitive: no difference between A and a (see the example below).
+							</li>
+							<li>
+								With this flag the search looks for all matches, without it – only the first one
+							</li>
+							<li>
+								Multiline mode (covered in the chapter Multiline mode, flag "m").
+							</li>
+							<li>
+								“Dotall” mode, allows to match newlines 
+							</li>
+							<li>
+								Enables full unicode support. The flag enables correct processing of surrogate pairs. 
+							</li>
+							<li>
+								Sticky mode
+							</li>
+						</ul>
+					</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
